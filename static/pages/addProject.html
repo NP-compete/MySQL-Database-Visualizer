@@ -1,0 +1,99 @@
+<div class="modal-content" ng-init="loadProject()">
+    <form class="form-horizontal" ng-submit="saveProject(); closeProjectDetails()">
+        <div class="modal-header">
+            <h4 class="modal-title">Configure Project</h4>
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Project Name</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="text" name="project" ng-model="project.name" required unique-project>
+                </div>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Database Host IP</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="text" name="host" ng-model="project.databaseConnection.host" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Port</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="number" name="port" ng-model="project.databaseConnection.port">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Username</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="text" name="user" ng-model="project.databaseConnection.user" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Password</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="password" name="password" ng-model="project.databaseConnection.password" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Database</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="text" name="database" ng-model="project.databaseConnection.database" required>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="showUnrelated" ng-model="project.showUnrelated">Include entities that have no relations</label>
+                    </div>
+                </div>
+            </div>
+
+<!--       Error pata nhi chal rha
+            <div class="form-group">
+                <label class="col-sm-3 control-label">JPA Relations</label>
+                <div class="col-sm-9">
+                    <textarea name="jpaRelations" class="form-control" ng-model="project.jpaRelations" data-json-relations></textarea>
+                    <span class="help-block">
+                        (This is optional) Download the <a href="/download/JpaParser.jar" target="_self">JPA Parser java app</a> and run it and copy the JSON output into this field. Please ensure you have Java 8 installed to run the app.
+                    </span>
+                </div>
+            </div>
+-->
+
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Source Code</label>
+                <div class="col-sm-9">
+
+                    <!--Hack to hide the default file picker button and output in order to replace it with our own customized version-->
+                    <label>
+                        <div class="btn btn-default">Select Files</div>
+                        <input type="file" id="filepicker" name="fileList" class="hidden-filepicker" ng-model="project.sourceFiles" webkitdirectory multiple file-input>
+                    </label>
+
+                    <div ng-if="!project.sourceFiles || project.sourceFiles.length === 0">
+                        No files Selected
+                    </div>
+                    <div ng-if="project.sourceFiles.length === 1">
+                        {{project.sourceFiles[0]}}
+                    </div>
+                    <div ng-if="project.sourceFiles.length > 1">
+                        {{project.sourceFiles.length + " files selected"}}
+                    </div>
+                    <div ng-if="!ready">
+                        {{progress}}
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <input id="save_btn" type="submit" class="btn btn-primary" value="Save Project">
+            <input id="cancel_btn" type="button" class="btn btn-default" value="Cancel" ng-click="closeProjectDetails()">
+        </div>
+    </form>
+</div>
