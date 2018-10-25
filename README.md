@@ -4,4 +4,12 @@ A node app to visualize MySQL Database
 
 
 ### To run 
-  node index.js
+1. Clone this repo
+```
+git clone https://github.com/NP-compete/MySQL-Database-Visualizer
+```
+2. cd to Directory 
+3. Run the code
+```
+node index.js
+```
